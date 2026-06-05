@@ -1,15 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes import characters
 
-app = FastAPI(title="StoryForge AI API")
+app = FastAPI(title='StoryForge AI API')
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app.add_middleware(CORSMiddleware, allow_origins=['http://localhost:5173'], allow_methods=['*'], allow_headers=['*'])
 
-@app.get("/")
+app.include_router(characters.router, prefix='/api/characters')
+
+@app.get('/')
 def health():
-    return {"status": "StoryForge API is running 🔥"}
+    return {'status': 'StoryForge API is running'}
