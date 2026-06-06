@@ -2,6 +2,7 @@ import { useState } from "react"
 import CharacterForge from "./components/CharacterForge/CharacterForge"
 import WorldForge from "./components/WorldForge/WorldForge"
 import PlotForge from "./components/PlotForge/PlotForge"
+import CharacterChat from "./components/CharacterChat/CharacterChat"
 
 const TABS = [
   { id: "character", label: "🧙 Character Forge", color: "#7c3aed" },
@@ -13,11 +14,9 @@ const TABS = [
 
 export default function App() {
   const [active, setActive] = useState("character")
-  const activeTab = TABS.find(t => t.id === active)
 
   return (
     <div style={{ minHeight: "100vh", background: "#f8f7ff" }}>
-
       <div style={{
         background: "white", borderBottom: "1px solid #e5e7eb",
         padding: "1rem 2rem", textAlign: "center"
@@ -55,10 +54,9 @@ export default function App() {
         {active === "character" && <CharacterForge />}
         {active === "world"     && <WorldForge />}
         {active === "plot"      && <PlotForge />}
-        {active === "chat"      && <ComingSoon label="💬 Character Chat" color="#2563eb" />}
+        {active === "chat"      && <CharacterChat />}
         {active === "story"     && <ComingSoon label="✍️ Story Continuation" color="#dc2626" />}
       </div>
-
     </div>
   )
 }
