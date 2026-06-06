@@ -1,6 +1,7 @@
 import { useState } from "react"
 import CharacterForge from "./components/CharacterForge/CharacterForge"
 import WorldForge from "./components/WorldForge/WorldForge"
+import PlotForge from "./components/PlotForge/PlotForge"
 
 const TABS = [
   { id: "character", label: "🧙 Character Forge", color: "#7c3aed" },
@@ -17,7 +18,6 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: "#f8f7ff" }}>
 
-      {/* Header */}
       <div style={{
         background: "white", borderBottom: "1px solid #e5e7eb",
         padding: "1rem 2rem", textAlign: "center"
@@ -28,7 +28,6 @@ export default function App() {
         </p>
       </div>
 
-      {/* Navigation */}
       <div style={{
         display: "flex", justifyContent: "center",
         gap: 8, padding: "1rem", flexWrap: "wrap",
@@ -52,11 +51,10 @@ export default function App() {
         ))}
       </div>
 
-      {/* Content */}
       <div style={{ padding: "1rem" }}>
         {active === "character" && <CharacterForge />}
         {active === "world"     && <WorldForge />}
-        {active === "plot"      && <ComingSoon label="📖 Plot Forge" color="#d97706" />}
+        {active === "plot"      && <PlotForge />}
         {active === "chat"      && <ComingSoon label="💬 Character Chat" color="#2563eb" />}
         {active === "story"     && <ComingSoon label="✍️ Story Continuation" color="#dc2626" />}
       </div>
