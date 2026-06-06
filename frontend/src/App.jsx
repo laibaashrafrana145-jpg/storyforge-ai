@@ -3,6 +3,7 @@ import CharacterForge from "./components/CharacterForge/CharacterForge"
 import WorldForge from "./components/WorldForge/WorldForge"
 import PlotForge from "./components/PlotForge/PlotForge"
 import CharacterChat from "./components/CharacterChat/CharacterChat"
+import StoryContinuation from "./components/StoryContinuation/StoryContinuation"
 
 const TABS = [
   { id: "character", label: "🧙 Character Forge", color: "#7c3aed" },
@@ -55,21 +56,8 @@ export default function App() {
         {active === "world"     && <WorldForge />}
         {active === "plot"      && <PlotForge />}
         {active === "chat"      && <CharacterChat />}
-        {active === "story"     && <ComingSoon label="✍️ Story Continuation" color="#dc2626" />}
+        {active === "story"     && <StoryContinuation />}
       </div>
-    </div>
-  )
-}
-
-function ComingSoon({ label, color }) {
-  return (
-    <div style={{
-      maxWidth: 700, margin: "4rem auto",
-      textAlign: "center", color: "#9ca3af"
-    }}>
-      <div style={{ fontSize: 48, marginBottom: 16 }}>🔨</div>
-      <h2 style={{ color }}>{label}</h2>
-      <p>Coming soon — being built!</p>
     </div>
   )
 }

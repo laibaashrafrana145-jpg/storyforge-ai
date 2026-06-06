@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import characters, worlds, plots, chat
+from routes import characters, worlds, plots, chat, story
 
 app = FastAPI(title="StoryForge AI API")
 
@@ -15,6 +15,7 @@ app.include_router(characters.router, prefix="/api/characters")
 app.include_router(worlds.router,     prefix="/api/worlds")
 app.include_router(plots.router,      prefix="/api/plots")
 app.include_router(chat.router,       prefix="/api/chat")
+app.include_router(story.router,      prefix="/api/story")
 
 @app.get("/")
 def health():
