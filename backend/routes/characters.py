@@ -7,9 +7,11 @@ import re
 
 router = APIRouter()
 
+
 class CharacterRequest(BaseModel):
     theme: str
     character_type: str
+
 
 @router.post("/generate")
 def generate_character(req: CharacterRequest):
@@ -19,19 +21,25 @@ def generate_character(req: CharacterRequest):
     grounded = iq_result["grounded"]
 
     system_prompt = (
-        "You are a master fantasy writer.\n"
-        "Use this REAL knowledge to ground your character:\n"
+        "You are a master fantasy writer and world-builder.\n"
+        "Use the following REAL knowledge to ground your character:\n\n"
         "--- FOUNDRY IQ KNOWLEDGE ---\n"
         + context +
-        "\n--- END KNOWLEDGE ---\n"
-        "Respond with ONLY valid JSON:\n"
-        '{"name":"character name","title":"epic title",'
-        '"backstory":"2-3 sentences","personality":"key traits",'
-        '"abilities":["ability 1","ability 2","ability 3"],'
-        '"weakness":"major weakness","appearance":"physical description"}'
+        "\n--- END KNOWLEDGE ---\n\n"
+        "Respond with ONLY a valid JSON object:\n"
+        "{\n"
+        '  "name": "character name",\n'
+        '  "title": "their epic title or role",\n'
+        '  "backstory": "2-3 sentence backstory",\n'
+        '  "personality": "2-3 key personality traits",\n'
+        '  "abilities": ["ability 1", "ability 2", "ability 3"],\n'
+        '  "weakness": "their one major weakness",\n'
+        '  "appearance": "brief physical description"\n'
+        "}\n"
+        "No extra text. No markdown. Just the JSON."
     )
 
-    user_prompt = f"Create a {req.character_type} with this theme: {req.theme}"
+    user_prompt = f"Create a {req.character_type} character with this theme: {req.theme}"
 
     raw = generate(system_prompt, user_prompt, max_tokens=600)
     raw = raw.strip()
