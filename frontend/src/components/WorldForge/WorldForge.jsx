@@ -8,17 +8,20 @@ export default function WorldForge() {
   const [type, setType] = useState("kingdom")
   const [world, setWorld] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [citations, setCitations] = useState([])
 
   async function generate() {
     if (!theme.trim()) return
     setLoading(true)
     setWorld(null)
+    setCitations([])
     try {
       const res = await axios.post("http://localhost:8000/api/worlds/generate", {
         theme,
         world_type: type
       })
       setWorld(res.data.world)
+      setCitations(res.data.citations || [])
     } catch (err) {
       alert("Error generating world. Is the backend running?")
     }
@@ -54,8 +57,8 @@ export default function WorldForge() {
           {TYPES.map(t => (
             <option key={t} value={t}>
               {t === "kingdom" ? "👑 Kingdom" :
-               t === "planet" ? "🪐 Planet" :
-               t === "city" ? "🏙️ City" : "✨ Magic System"}
+               t === "planet"  ? "🪐 Planet" :
+               t === "city"    ? "🏙️ City" : "✨ Magic System"}
             </option>
           ))}
         </select>
@@ -87,7 +90,7 @@ export default function WorldForge() {
           <Section title="📜 Description" content={world.description} />
           <Section title="🗺️ Geography" content={world.geography} />
           <Section title="👥 Inhabitants" content={world.inhabitants} />
-          <Section title="✨ Magic & Technology" content={world.magic_or_technology} />
+          <Section title="✨ Magic and Technology" content={world.magic_or_technology} />
           <Section title="⚔️ Conflicts" content={world.conflicts} />
 
           <div style={{
@@ -98,6 +101,8 @@ export default function WorldForge() {
             <p style={{ fontWeight: 500, margin: "0 0 4px", color: "#065f46" }}>🔮 Hidden Secret</p>
             <p style={{ margin: 0, color: "#064e3b", fontSize: 14 }}>{world.secrets}</p>
           </div>
+
+          <Citations citations={citations} />
         </div>
       )}
     </div>
@@ -109,6 +114,20 @@ function Section({ title, content }) {
     <div style={{ marginBottom: 12 }}>
       <p style={{ fontWeight: 500, marginBottom: 4, color: "#374151" }}>{title}</p>
       <p style={{ margin: 0, color: "#4b5563", lineHeight: 1.6, fontSize: 14 }}>{content}</p>
+    </div>
+  )
+}
+
+function Citations({ citations }) {
+  if (!citations || citations.length === 0) return null
+  return (
+    <div style={{
+      marginTop: 16, padding: "8px 14px",
+      background: "#f0f9ff", borderRadius: 8,
+      borderLeft: "3px solid #0ea5e9",
+      fontSize: 12, color: "#0369a1"
+    }}>
+      🔍 <strong>Foundry IQ Grounded</strong> — Sources: {citations.join(", ")}
     </div>
   )
 }

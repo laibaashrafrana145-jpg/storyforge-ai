@@ -8,17 +8,20 @@ export default function CharacterForge() {
   const [type, setType] = useState("hero")
   const [character, setCharacter] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [citations, setCitations] = useState([])
 
   async function generate() {
     if (!theme.trim()) return
     setLoading(true)
     setCharacter(null)
+    setCitations([])
     try {
       const res = await axios.post("http://localhost:8000/api/characters/generate", {
         theme,
         character_type: type
       })
       setCharacter(res.data.character)
+      setCitations(res.data.citations || [])
     } catch (err) {
       alert("Error generating character. Is the backend running?")
     }
@@ -107,6 +110,8 @@ export default function CharacterForge() {
               ))}
             </div>
           </div>
+
+          <Citations citations={citations} />
         </div>
       )}
     </div>
@@ -118,6 +123,20 @@ function Section({ title, content }) {
     <div style={{ marginBottom: 12 }}>
       <p style={{ fontWeight: 500, marginBottom: 4, color: "#374151" }}>{title}</p>
       <p style={{ margin: 0, color: "#4b5563", lineHeight: 1.6, fontSize: 14 }}>{content}</p>
+    </div>
+  )
+}
+
+function Citations({ citations }) {
+  if (!citations || citations.length === 0) return null
+  return (
+    <div style={{
+      marginTop: 16, padding: "8px 14px",
+      background: "#f0f9ff", borderRadius: 8,
+      borderLeft: "3px solid #0ea5e9",
+      fontSize: 12, color: "#0369a1"
+    }}>
+      🔍 <strong>Foundry IQ Grounded</strong> — Sources: {citations.join(", ")}
     </div>
   )
 }
