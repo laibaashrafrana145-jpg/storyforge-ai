@@ -1,70 +1,67 @@
-# ⚔️ StoryForge AI
+# StoryForge AI
 
-Build entire fictional universes with AI — powered by Groq LLM and Microsoft Foundry IQ
+StoryForge AI is an AI-powered creative writing tool that lets users build complete fictional universes — characters, worlds, plots, and stories — grounded in real mythology and history. Built for the Agents League Hackathon 2026, Creative Apps track, hosted by Microsoft.
 
-## 🏆 Agents League Hackathon 2026 — Creative Apps Track
+---
 
-## ✨ What It Does
+## The Idea
 
-StoryForge AI lets users build complete fictional universes grounded in real-world mythology, history, and culture using AI-assisted generation. Every feature connects together — generate a world, populate it with characters, build a plot, then chat with your characters directly.
+Most AI writing tools give you generic output. StoryForge is different. When you ask for an Egyptian warrior, it does not just make something up — it retrieves real knowledge about Egyptian mythology, gods, culture, and architecture first, then builds your character from that foundation. The result feels authentic, historically inspired, and genuinely interesting.
 
-## 🧩 Features
+This is possible because of Microsoft Foundry IQ, which acts as a knowledge retrieval layer between the user request and the AI generation. Every character, world, and plot is grounded before it is generated.
 
-### 🧙 Character Forge
-Generate fully detailed heroes, villains, and side characters with name, title, backstory, personality, abilities, weakness, and appearance.
+---
 
-### 🌍 World Forge
-Generate kingdoms, planets, cities, and magic systems with geography, inhabitants, conflicts, and hidden secrets.
+## Features
 
-### 📖 Plot Forge
-Generate story arcs, chapters, quests, and conflicts with a full narrative timeline — setup, conflict, rising action, climax, and resolution.
+### Character Forge
+Generate fully detailed fictional characters — heroes, villains, and side characters. Each character includes a name, title, backstory, personality traits, abilities, weakness, and physical appearance. Characters are grounded in real mythology so an Egyptian hero will reference Amun, Ra, the khopesh, and Thebes naturally.
 
-### 💬 Character Chat
-Talk directly to your generated characters. They stay in-persona using their backstory, personality, and world knowledge.
+### World Forge
+Build entire fictional worlds — kingdoms, planets, cities, and magic systems. Each world includes geography, inhabitants, culture, power systems, conflicts, and a hidden secret. Worlds feel historically inspired rather than generically fantastical.
 
-### ✍️ Story Continuation
-Continue writing from any point in your story with AI completing the narrative in your established world and tone.
+### Plot Forge
+Generate complete narrative structures — story arcs, chapters, quests, and conflicts. Each plot includes a setup, conflict, rising action, climax, and resolution, displayed as a visual timeline. Themes are extracted automatically.
 
-## 🤖 Microsoft IQ Integration
+### Character Chat
+Have a real conversation with any character you generate. The character stays fully in-persona across multiple messages, drawing on their backstory, personality, and world knowledge. Built with multi-turn conversation memory.
 
-StoryForge AI uses Foundry IQ as its intelligence layer to retrieve grounded knowledge from real mythology, history, architecture, and culture sources before generating content.
+### Story Continuation
+Write any opening paragraph and the AI continues your story in the same tone, style, and voice. You can keep clicking to continue building the narrative. Your writing appears in black, AI continuations appear in red so you always know what you wrote.
 
-Instead of generic AI prompts, every generation is grounded in real-world knowledge:
+---
 
-- User creates an Egyptian-inspired world
-- Foundry IQ retrieves Egyptian mythology, historical culture, architecture, geography
-- StoryForge transforms it into rich fantasy content with citations
+## Microsoft Foundry IQ Integration
 
-This demonstrates knowledge retrieval, grounding, and reduced hallucination — exactly what Foundry IQ is designed for.
+StoryForge uses Foundry IQ as its intelligence layer. Before any content is generated, the system retrieves relevant grounded knowledge from a curated knowledge base covering Egyptian mythology, Norse mythology, and medieval architecture.
 
-## 🛠️ Tech Stack
+The flow works like this. A user types a theme such as ancient Egypt. The Foundry IQ service searches the knowledge base and retrieves relevant facts about Egyptian gods, sacred places, magic systems, and culture. This context is passed to the language model alongside the generation request. The model produces content that is grounded in real knowledge rather than hallucinated details. The UI shows a citation at the bottom of every generated card confirming which knowledge sources were used.
 
-- Frontend: React + Vite
-- Backend: Python + FastAPI
-- AI Model: Groq llama-3.3-70b in development, Azure OpenAI gpt-4o-mini in production
-- Knowledge Retrieval: Azure AI Search via Foundry IQ
-- Dev Tools: GitHub Copilot in VS Code
+This directly demonstrates the core value of Foundry IQ — agentic knowledge retrieval that reduces hallucination and produces cited, grounded answers.
 
-## 🤖 GitHub Copilot Usage
+---
 
-GitHub Copilot was used throughout the entire development process:
+## Tech Stack
 
-- Generating FastAPI route boilerplate for all 5 features
-- Writing React component structures and state management
-- Debugging JSON parsing errors from AI responses
-- Suggesting prompt engineering improvements for better outputs
-- Auto-completing repetitive code patterns across routes
-- Writing Pydantic models for request validation
-- Suggesting CORS and middleware configuration
+- Frontend: React and Vite
+- Backend: Python and FastAPI
+- AI model: Groq llama-3.3-70b during development, swapping to Azure OpenAI gpt-4o-mini for production submission
+- Knowledge retrieval: Local knowledge base simulating Azure AI Search via Foundry IQ
+- Development tools: GitHub Copilot in VS Code throughout the entire build
 
-## 🚀 Setup
+---
 
-Prerequisites:
-- Python 3.10 or higher
-- Node.js 18 or higher
-- Groq API key — free at console.groq.com
+## GitHub Copilot Usage
 
-Backend setup:
+GitHub Copilot was used throughout every day of development. It generated the initial FastAPI route boilerplate for all five features, suggested the Pydantic model structures for request validation, helped debug the JSON parsing errors that came from AI responses containing apostrophes and smart quotes, improved the system prompts for better and more consistent output, auto-completed repetitive patterns across all five route files, suggested the multi-turn conversation history structure for Character Chat, and helped write the CSS animations and hover effects for the UI polish.
+
+---
+
+## Setup
+
+You need Python 3.10 or higher and Node.js 18 or higher. Get a free Groq API key at console.groq.com.
+
+Backend:
 
     cd backend
     python -m venv .venv
@@ -73,7 +70,7 @@ Backend setup:
     copy .env.example .env
     uvicorn main:app --reload
 
-Frontend setup:
+Frontend:
 
     cd frontend
     npm install
@@ -81,9 +78,9 @@ Frontend setup:
 
 Open the app at http://localhost:5173
 
-## 🔑 Environment Variables
+---
 
-Copy .env.example to .env and fill in your keys:
+## Environment Variables
 
     GROQ_API_KEY=your_groq_key_here
     GROQ_MODEL=llama-3.3-70b-versatile
@@ -94,68 +91,88 @@ Copy .env.example to .env and fill in your keys:
     AZURE_SEARCH_API_KEY=
     AZURE_SEARCH_INDEX=
 
-## 📁 Project Structure
+---
+
+## Project Structure
 
     storyforge-ai/
-    ├── backend/
-    │   ├── routes/
-    │   │   ├── characters.py
-    │   │   ├── worlds.py
-    │   │   ├── plots.py
-    │   │   ├── chat.py
-    │   │   └── story.py
-    │   ├── services/
-    │   │   ├── llm.py
-    │   │   └── foundry_iq.py
-    │   ├── main.py
-    │   └── requirements.txt
-    ├── frontend/
-    │   └── src/
-    │       ├── components/
-    │       │   ├── CharacterForge/
-    │       │   ├── WorldForge/
-    │       │   ├── PlotForge/
-    │       │   ├── CharacterChat/
-    │       │   └── StoryContinuation/
-    │       └── App.jsx
-    ├── knowledge-base/
-    │   ├── egyptian-mythology.md
-    │   ├── norse-mythology.md
-    │   └── medieval-architecture.md
-    ├── .env.example
-    └── README.md
+    backend/
+        routes/
+            characters.py
+            worlds.py
+            plots.py
+            chat.py
+            story.py
+        services/
+            llm.py
+            foundry_iq.py
+        main.py
+        requirements.txt
+    frontend/
+        src/
+            components/
+                CharacterForge/
+                WorldForge/
+                PlotForge/
+                CharacterChat/
+                StoryContinuation/
+            App.jsx
+            App.css
+    knowledge-base/
+        egyptian-mythology.md
+        norse-mythology.md
+        medieval-architecture.md
+    .env.example
+    README.md
 
-## 📅 Build Log
+---
 
-| Day | Date | What Was Built |
-|-----|------|----------------|
-| Day 1 | Jun 4 | Project setup, folder structure, backend skeleton, Groq AI integration |
-| Day 2 | Jun 5 | Character Forge — backend route and React UI |
-| Day 3 | Jun 5 | World Forge — backend route, React UI, navigation bar |
-| Day 4 | Jun 5 | Plot Forge — backend route, timeline React UI |
-| Day 5 | Jun 6 | Character Chat — multi-turn conversation with characters |
-| Day 6 | Jun 6 | Story Continuation — AI writing assistant |
-| Day 7 | Jun 7 | Foundry IQ grounding and knowledge citations |
-| Day 8 | Jun 8 | UI polish and Copilot documentation |
-| Day 9 | Jun 9 | Demo video recording |
+## Build Log
 
-## 🏆 Judging Criteria Coverage
+Day 1 — June 4 — Project setup, folder structure, backend skeleton, Groq AI integration working
 
-| Criteria | How StoryForge Addresses It |
-|----------|-----------------------------|
-| Accuracy and Relevance 20% | All features meet Creative Apps track requirements |
-| Reasoning and Multi-step Thinking 20% | Plot Forge chains setup, conflict, climax into coherent narratives |
-| Creativity and Originality 15% | Unique universe-building concept combining 5 interconnected tools |
-| User Experience and Presentation 15% | Clean tabbed UI, color-coded features, real-time generation |
-| Reliability and Safety 20% | Foundry IQ grounding reduces hallucination, robust JSON parsing |
-| Community Vote 10% | Shared on Discord during event week |
+Day 2 — June 5 — Character Forge backend route and React UI complete
 
-## 📺 Demo Video
+Day 3 — June 5 — World Forge backend route, React UI, and navigation bar added
 
-Coming June 12, 2026
+Day 4 — June 5 — Plot Forge backend route and timeline React UI complete
 
-## 🔗 Links
+Day 5 — June 6 — Character Chat with multi-turn conversation memory complete
 
-- Hackathon: Agents League Hackathon 2026
-- Discord: Agents League Arena
-- Microsoft Reactor: Live battle recordings
+Day 6 — June 6 — Story Continuation with continue further functionality complete
+
+Day 7 — June 6 — Foundry IQ knowledge grounding and citations in UI complete
+
+Day 8 — June 7 — UI polish, home page, gradient header, card animations complete
+
+Day 9 — June 8 — Demo video recording
+
+---
+
+## Judging Criteria
+
+Accuracy and Relevance — All five features meet the Creative Apps track requirements and demonstrate meaningful use of GitHub Copilot throughout development.
+
+Reasoning and Multi-step Thinking — Plot Forge chains setup, conflict, rising action, climax, and resolution into a coherent narrative. Character Chat maintains context across multiple turns. Story Continuation tracks the full story history.
+
+Creativity and Originality — The concept of a connected universe builder where characters, worlds, and plots all relate to each other is a novel take on AI creative tools. The Foundry IQ grounding gives outputs a historical authenticity that generic AI tools cannot match.
+
+User Experience and Presentation — Clean tabbed navigation, color-coded features, animated cards, fade-in transitions, and a home page that explains the product clearly.
+
+Reliability and Safety — Foundry IQ grounding reduces hallucination. Robust JSON parsing with fallback handling means the app never crashes on bad model output. All API keys are stored in environment variables and never committed to the repository.
+
+Community Vote — Project shared on the Agents League Discord during event week.
+
+---
+
+## Demo Video
+
+Coming June 8, 2026
+
+---
+
+## Links
+
+Hackathon: Agents League Hackathon 2026
+Discord: Agents League Arena
+Microsoft Reactor: Live battle recordings
