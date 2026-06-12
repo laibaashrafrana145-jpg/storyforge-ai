@@ -167,7 +167,13 @@ Community Vote — Project shared on the Agents League Discord during event week
 
 ## Demo Video
 
-Coming June 8, 2026
+Demo Video
+
+Watch the full demo: https://youtu.be/V0DWxnTfnEc
+
+The demo covers all five features — Character Forge, World Forge, 
+Plot Forge, Character Chat, and Story Continuation — and demonstrates 
+Microsoft Foundry IQ knowledge grounding with live citations shown in the UI.
 
 ---
 
